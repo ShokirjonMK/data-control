@@ -1,0 +1,24 @@
+metricbeat.modules:
+  # Docker monitoring
+  - module: docker
+    metricsets: ["container", "cpu", "diskio", "memory", "network"]
+    hosts: ["unix:///var/run/docker.sock"]
+    period: 10s
+    enabled: true
+
+  # PostgreSQL monitoring
+  - module: postgresql
+    metricsets: ["database", "bgwriter", "activity"]
+    period: 10s
+    hosts: ["postgres://fulfillment:pass4ask06yii@postgres:5432"]
+    username: "fulfillment"
+    password: "pass4ask06yii"
+
+
+output.elasticsearch:
+  hosts: ["http://elasticsearch:9200"]
+  username: "elastic"
+  password: "elasticpassword"
+
+setup.kibana:
+  host: "http://kibana:5601"

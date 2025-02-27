@@ -1,0 +1,29 @@
+heartbeat.monitors:
+  - type: http
+    id: frontend-monitor
+    name: Frontend Service
+    schedule: '@every 10s'
+    hosts: ["http://localhost:8071"]
+    check.request:
+      method: GET
+    check.response:
+      status: 200
+
+  - type: http
+    id: backend-monitor
+    name: Backend Service
+    schedule: '@every 10s'
+    hosts: ["http://localhost:8072"]
+    check.request:
+      method: GET
+    check.response:
+      status: 200
+
+  - type: tcp
+    id: postgres-monitor
+    name: PostgreSQL Service
+    schedule: '@every 10s'
+    hosts: ["postgres:5432"]
+
+output.elasticsearch:
+  hosts: ["http://elasticsearch:9200"]
